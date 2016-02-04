@@ -29,10 +29,6 @@ MISTAKES
 
 
 FIXES (in order of priority)
-- Improve the flow
-- Simplify functions (especially bindStartButton and bindReset)
-- Restart game returns to selection screen
-- Ensure orientation remains the same for each game
 - Prevent game from hanging if nobody guesses <-- unlikely to happen but will break game
 
 
