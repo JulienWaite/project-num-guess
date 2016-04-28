@@ -33,6 +33,7 @@ $(document).ready(function(){ // do not remove - insert all code in here!
                  [1,1,1,1,0,1,1,1,1,1,0,1,1,1,1], //8
                  [1,1,1,1,0,1,1,1,1,0,0,1,1,1,1]];//9
 
+  // sound effects
   var soundIncorrect = new buzz.sound("sounds/incorrect-guess.mp3");
   var soundCorrect = new buzz.sound("sounds/correct-guess.mp3");
   var soundButtonClick = new buzz.sound("sounds/button-click.mp3"); // add after fixing event listeners!
@@ -53,7 +54,8 @@ $(document).ready(function(){ // do not remove - insert all code in here!
   var pOneScore = 0;
   var pTwoScore = 0;
 
-  // UTILITY FUNCTION
+  // UTILITY FUNCTIONS
+  // Create a 2D version of the array
   function toTwoDArr (array) {
     var twoDArr = [];
     var timesToRun = array.length / 3;
@@ -66,6 +68,7 @@ $(document).ready(function(){ // do not remove - insert all code in here!
     return twoDArr;
   }
 
+  // Create a 1D version of the array
   function toOneDArr (array) {
     var oneDArr = [];
     for (var i=0; i < array.length; i++){
@@ -76,6 +79,7 @@ $(document).ready(function(){ // do not remove - insert all code in here!
     return oneDArr;
   }
 
+  // Create an inverse version of the number
   function inverse (array) {
     var inverseArray = [];
     var twoDArr = toTwoDArr(array);
@@ -90,6 +94,7 @@ $(document).ready(function(){ // do not remove - insert all code in here!
     return oneDArr;
   }
 
+  // Create a mirror version of the number
   function mirror (array) {
     var mirrorArray = [];
     var twoDArr = toTwoDArr(array);
@@ -104,7 +109,7 @@ $(document).ready(function(){ // do not remove - insert all code in here!
     return oneDArr;
   }
 
-  // This function could be replaced by calling both the above functions
+  // This could be replaced by calling both the above functions
   function inverseMirror (array) {
     var inverseMirrorArray = [];
     for (var i = array.length - 1; i >=0; i--) {
@@ -113,13 +118,12 @@ $(document).ready(function(){ // do not remove - insert all code in here!
     return inverseMirrorArray;
   }
 
-  // SUB FUNCTION
+  // SUB FUNCTIONS
   function setTargetScore () {
     targetScoreInput = $('#set-target-score').val() || DEFAULT_TARGET;
     $('#target-score').text(targetScoreInput);
   }
 
-  // feat. depending on what input, show different screen
   function setGridSize () {
     spriteSizeInput = $('#set-sprite-size').val() || "3x3";
 
@@ -146,7 +150,6 @@ $(document).ready(function(){ // do not remove - insert all code in here!
     }
   }
 
-  // ORIENTATION BUTTON
   function generateNumberAndSetOrientation () {
     answer = Math.floor(Math.random()*(10));
     numberInGrid = puzzles[answer];
@@ -205,28 +208,28 @@ $(document).ready(function(){ // do not remove - insert all code in here!
         clicked = true;
         // console.log(gridCounter);
         //if (gridCounter >= numberInGrid.length) {
-        //$userGuessElem1.text("The number is " + answer +".");
+        //$guessElem1.text("The number is " + answer +".");
         //}
       }
     });
   }
 
-  // calculates score
-  function calculateScore (userGuess) {
+  // Calculates score
+  function calculateScore (guess) {
     var bonus = (numberInGrid.length - gridCounter);
     var pointsAwarded = answer + bonus;
     //console.log("cs", numberInGrid)
-    if (userGuess === answer) {
+    if (guess === answer) {
       soundCorrect.play();
-      $('#results-text1').text("The number " + userGuess + " is correct!");
+      $('#results-text1').text("The number " + guess + " is correct!");
       $('#results-text2').text("You score " + pointsAwarded + " (" + answer + " + " + bonus + ") point(s).");
     }
     else {
       soundIncorrect.play();
-      $('#results-text1').text("Wrong!  The number is " + answer + ", not " + userGuess + ".");
+      $('#results-text1').text("Wrong!  The number is " + answer + ", not " + guess + ".");
       $('#results-text2').text("Your opponent scores " + pointsAwarded + " (" + answer + " + " + bonus + ") point(s).");
     }
-    if (turnCounter % 2 === 0 && userGuess === answer || turnCounter % 2 !== 0 && userGuess !== answer)  {
+    if (turnCounter % 2 === 0 && guess === answer || turnCounter % 2 !== 0 && guess !== answer)  {
       pOneScore = pOneScore + pointsAwarded;
       $('#player-one-score').text(pOneScore);
     }
@@ -236,7 +239,7 @@ $(document).ready(function(){ // do not remove - insert all code in here!
     }
   }
 
-  // removes remaining squares to show answer
+  // Removes remaining squares to show answer
   function revealAnswer () {
     for(var i = 0; i < numberInGrid.length; i++) {
       if(numberInGrid[i] === 1) {
@@ -248,7 +251,7 @@ $(document).ready(function(){ // do not remove - insert all code in here!
     }
   }
 
-  // reset grid to background colour
+  // Reset grid to background colour
   function resetCell () {
     gridCounter = 0;
     for(var i = 0; i < numberInGrid.length; i++) {
@@ -275,8 +278,8 @@ $(document).ready(function(){ // do not remove - insert all code in here!
     }
   }
 
-  // MAIN FUNCTION
-  // STEP 1 (This function needs breaking down into smaller chunks)
+  // MAIN FUNCTIONS
+  // STEP 1
   function bindStartButton () {
     $('#start-button').on("click", function(){
       setTargetScore();
@@ -289,28 +292,28 @@ $(document).ready(function(){ // do not remove - insert all code in here!
   }
 
   // STEP 2A
-  function bindUserPass () {
+  function bindPassButton () {
     $('#pass-button').off().on("click", function() {
       if (clicked) { // when click is true
         clicked = false;
         turnCounter = turnCounter + 1;
         highlightPlayer();
       }
-    })
+    });
   }
 
   // STEP 2B
-  function bindUserGuess () {
+  function bindGuessButtons () {
     $('.guess-buttons').off().on("click", function() {
       if (clicked) { // when click is true
-        var userGuess = parseInt($(this).val());
+        var guess = parseInt($(this).val());
         clicked = false;
 
         turnCounter = turnCounter + 1;
         highlightPlayer();
 
-        // calcuate score
-        calculateScore(userGuess);
+        // Calcuate score
+        calculateScore(guess);
         revealAnswer();
 
         $('#pass-button').hide();
@@ -322,7 +325,7 @@ $(document).ready(function(){ // do not remove - insert all code in here!
         }
 
         if (pOneScore >= targetScoreInput) { // target is reached, end of game
-          $('#results-text3').text("Player 1 wins.  Thank you for playing."); // create modal
+          $('#results-text3').text("Player 1 wins.  Thank you for playing.");
         }
         else if (pTwoScore >= targetScoreInput) {
           $('#results-text3').text("Player 2 wins. Thank you for playing.");
@@ -330,7 +333,8 @@ $(document).ready(function(){ // do not remove - insert all code in here!
       }
     });
   }
-  // This function needs fixing
+
+  // Needs fixing
   function bindRestartButton () {
     $('#restart-button').on("click", function(){
       resetCell();
@@ -339,7 +343,7 @@ $(document).ready(function(){ // do not remove - insert all code in here!
       pTwoScore = 0;
       $('#player-one-score').text(pOneScore);
       $('#player-two-score').text(pTwoScore);
-
+      $('#restart-button').hide();
       showOptionScreen(true);
     });
   }
@@ -349,15 +353,15 @@ $(document).ready(function(){ // do not remove - insert all code in here!
       resetCell();
       generateNumberAndSetOrientation();
       selectCell();
-    })
+    });
   }
 
   function init () {
     bindStartButton();
-    bindUserPass();
-    bindUserGuess();
+    bindPassButton();
+    bindGuessButtons();
     bindRestartButton();
-    bindNextRoundButton()
+    bindNextRoundButton();
   }
 
   init(); // start code

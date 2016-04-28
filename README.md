@@ -7,7 +7,7 @@ INSTRUCTIONS - Player one clicks a square to reveal part of a number between 0 a
 TECHNOLOGIES USED - HTML5, CSS3, Bootstrap, JavaScript, jQuery, Buzz(for sound effects)
 
 
-INSTALLATION INSTRUCTIONS - None if connected to the internet so links to Bootstrap, jquery and Buzz libraries work
+INSTALLATION INSTRUCTIONS - None if connected to the internet so links to Bootstrap, jQuery and Buzz libraries work
 
 
 APPROACH TAKEN
@@ -34,6 +34,7 @@ FIXES (in order of priority)
 
 FUTURE IMPROVEMENTS
 - Add text explaining what mode you're in
+- Add button to return to options screen OR start new game
 - Use jQuery to change game-screen size rather than hard coded HTML
 - Add high score table
 - Add more sprite sizes / arrays

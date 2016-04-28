@@ -9,12 +9,12 @@
     <title>numGUESS</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/buzz/1.1.10/buzz.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.4/js/bootstrap-select.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.4/js/bootstrap-select.min.js"></script>  <!-- selectpicker -->
     <script src="js/application.js"></script>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.4/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.4/css/bootstrap-select.min.css"> <!-- selectpicker -->
     <link href="css/custom.css" rel="stylesheet">
   </head>
 
@@ -97,6 +97,8 @@
             <button class="guess-buttons btn btn-default" value="7">7</button>
             <button class="guess-buttons btn btn-default" value="8">8</button>
             <button class="guess-buttons btn btn-default" value="9">9</button>
+          </div>
+          <div class="row buttons">
             <button id="pass-button" class="btn btn-lg btn-default">PASS</button>
             <button id="reset-cells-button" class="btn btn-lg btn-default" style="display: none">NEXT ROUND</button>
             <button id="restart-button" class="btn btn-lg btn-default" style="display: none">RESTART GAME</button>
@@ -117,11 +119,11 @@
       <section class="right-side col-xs-6"> <!-- right-side-->
         <div id="instructions-screen"> <!-- hide when game starts -->
           <h3>Instructions</h3>
-          <p>Player one clicks a square to reveal part of a number between 0 and 9.</p>
-          <p>They can either guess the number or pass the turn to player 2.</p>
-          <p>Guess correctly to score the value of that number, plus a point for each remaining square uncovered.  (For example, guessing the number 7 with 4 squares still covered would score 11 points.)</p>
-          <p>Guess incorrectly and the points are awarded to the opposing player.</p>
-          <p>The game continues until one of the players reaches the chosen target score.</p>
+          <p>Player one clicks a square to uncover part of a number between 0 and 9.</p>
+          <p>They can then either guess what that number is or pass the turn to the opposing player.</p>
+          <p>If the guess is correct that player is awarded the value of that number, plus an additional point for each uncovered square.  (For example, correctly guessing the number 7 with 4 squares still covered would score 11 points.)</p>
+          <p>If the guess is incorrect the points are awarded to the opposing player.</p>
+          <p>The game continues until a player reaches the chosen target score.</p>
         </div> <!-- instructions & start -->
 
         <!-- RIGHT SIDE DURING GAME ONLY (size3x3)-->

@@ -9,7 +9,7 @@ var fourFour =  [[1,1,1,1,1,0,0,1,1,0,0,1,1,1,1,1], // 0
                  [0,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1], // 8
                  [1,1,1,1,1,0,1,1,1,1,1,1,0,0,1,1]];// 9
 
-var threeSix = [[1,1,1,1,0,1,1,0,1,1,0,1,1,0,1,1,1,1]  //0
+var threeSix = [[1,1,1,1,0,1,1,0,1,1,0,1,1,0,1,1,1,1],  //0
                 [0,1,0,1,1,0,0,1,0,0,1,0,0,1,0,1,1,1], //1
                 [2], //2
                 [3], //3
@@ -74,7 +74,7 @@ var threeFive = [[1,1,1,
                   1,0,1,
                   1,0,1,
                   1,0,1,
-                  1,1,1] // 0
+                  1,1,1], // 0
 
 
                  [0,1,0,
@@ -140,49 +140,49 @@ var threeFive = [[1,1,1,
   [1,2,3],
   [4,5,6],
   [7,8,9]
-]
+],
 
 // Mirror
 [
   [3,2,1],
   [6,5,4],
   [9,8,7]
-]
+],
 
 // Inverse
 [
   [7,8,9],
   [4,5,6],
   [1,2,3]
-]
+],
 
 // Inverse Mirror
 [
   [9,8,7],
   [6,5,4],
   [3,2,1]
-]
+],
 
 // Seven (Normal)
 [1,1,1,
  0,0,1,
  0,1,0,
  1,0,0,
- 1,0,0]
+ 1,0,0],
 
 // Seven (Mirror)
 [1,1,1,
  1,0,0,
  0,1,0,
  0,0,1,
- 0,0,1]
+ 0,0,1],
 
 // Seven (Inverse)
 [1,0,0,
  1,0,0,
  0,1,0,
  0,0,1,
- 1,1,1]
+ 1,1,1],
 
 // Seven (Inverse Mirror)
 [0,0,1,
@@ -191,74 +191,15 @@ var threeFive = [[1,1,1,
  1,0,0,
  1,1,1]
 
+for (var i = 0; i < response.items.length / 4; i++) {
+          var newRow = $('<div class="row"></div>');
 
-  // STEP 1
-  function bindStartButton () {
-    $('#start-button').on("click", function(){
-      // feat. depending on what input, show different screen
-      targetScoreInput = $('#set-target-score').val() || DEFAULT_TARGET;
-      $targetScoreElem.text(targetScoreInput);
+          var image1 = '<img class="thumbnail col-xs-3" src="' + response.items[i + (i*3)    ].media.m + '">';
+          var image2 = '<img class="thumbnail col-xs-3" src="' + response.items[i + (i*3) + 1].media.m + '">';
+          var image3 = '<img class="thumbnail col-xs-3" src="' + response.items[i + (i*3) + 2].media.m + '">';
+          var image4 = '<img class="thumbnail col-xs-3" src="' + response.items[i + (i*3) + 3].media.m + '">';
 
-      puzzleSize();
+          newRow.append(image1 + image2 + image3 + image4);
 
-  });
-
-  // STEP 1
-  function puzzleSize () {
-    $('#start-button').on("click", function(){
-      // feat. depending on what input, show different screen
-      targetScoreInput = $('#set-target-score').val() || DEFAULT_TARGET;
-      $targetScoreElem.text(targetScoreInput);
-
-      spriteSizeInput = $('#set-sprite-size').val() || "3x3";
-
-      var spriteWidth = parseInt(spriteSizeInput[0]);
-      var spriteHeight = parseInt(spriteSizeInput[2]);
-
-      console.log(spriteSizeInput)
-      if (spriteWidth === 3 && spriteHeight === 3)  {
-        $('#instructions-screen').hide();
-        $('#game-screen3x3').show();
-        puzzles = threeThree;
-      }
-      else if (spriteWidth === 3 && spriteHeight === 4) {
-        $('#instructions-screen').hide();
-        $('#game-screen3x4').show();
-        puzzles = threeFour;
-      }
-      else if (spriteWidth === 3 && spriteHeight === 5) {
-        $('#instructions-screen').hide();
-        $('#game-screen3x5').show();
-        puzzles = threeFive;
-      }
-      else {
-        console.log("You've broken numGuess!");
-      }
-
-      // recalculate array
-      generateNumber();
-
-      // ORIENTATION BUTTON
-      orientationInput = $('#set-orientation').val() || "normal";
-      if (orientationInput === "normal") {
-      }
-      else if (orientationInput === "inverse") {
-        numberInGrid = inverse(numberInGrid);
-      }
-      else if (orientationInput === "mirror") {
-        numberInGrid = mirror(numberInGrid);
-      }
-      else if (orientationInput === "inverse-mirror") {
-        numberInGrid = inverseMirror(numberInGrid);
-      }
-      else {
-        console.log("You've broken numGuess!");
-      }
-
-      $('#options-screen').hide();
-      $('#play-box').show();
-
-      highlightPlayer();
-      selectCell();
-    });
-  }
+          $('#images').append(newRow);
+}
